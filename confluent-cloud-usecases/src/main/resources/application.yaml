@@ -1,0 +1,27 @@
+server:
+  port: 5000
+
+spring:
+  kafka:
+    properties:
+      basic:
+        auth:
+          credentials:
+            source: USER_INFO
+          user:
+            info: { SR_SECRET_KEY }:{ SR_SECRET_VALUE }
+
+      key_serializer: org.apache.kafka.common.serialization.StringSerializer
+      value_serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+      schema:
+        registry:
+          url: https://psrc-1w11j.eu-central-1.aws.confluent.cloud
+      sasl:
+        mechanism: PLAIN
+        jaas.config: org.apache.kafka.common.security.plain.PlainLoginModule   required username={ CLUSTER_SECRET_KEY}   password= { CLUSTER_SECRET_VALUE };
+    bootstrap-servers: pkc-2396y.us-east-1.aws.confluent.cloud:9092
+    timeout: 0
+    ack: 0
+    number-of-tries: 0
+    imdepotence: false
+
