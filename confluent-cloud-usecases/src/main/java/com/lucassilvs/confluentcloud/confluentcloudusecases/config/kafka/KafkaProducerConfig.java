@@ -1,6 +1,6 @@
 package com.lucassilvs.confluentcloud.confluentcloudusecases.config.kafka;
 
-import com.lucasSilvs.confluentCloud.confluentcloudusecases.kafka.UsuarioDadosTesteAvro;
+import com.lucassilvs.confluentcloud.confluentcloudusecases.kafka.UsuarioDadosTesteAvro;
 import io.confluent.kafka.serializers.AbstractKafkaSchemaSerDeConfig;
 import io.confluent.kafka.serializers.KafkaAvroSerializerConfig;
 import org.apache.kafka.clients.CommonClientConfigs;
@@ -44,17 +44,28 @@ public class KafkaProducerConfig {
     @Value("${spring.kafka.properties.schema.registry.url}")
     private String schemaRegistryUrl;
 
-    @Value("${spring.kafka.properties.sasl.jaas.config}")
-    private String saslJassConfig;
-
     @Value("${spring.kafka.properties.sasl.mechanism}")
     private String saslMechanism;
 
     @Value("${spring.kafka.properties.basic.auth.credentials.source}")
     private String schemaRegistryCredentialsSource;
 
-    @Value("${spring.kafka.properties.basic.auth.user.info}")
-    private String schemaRegistryUserInfoConfig;
+    @Value("${spring.kafka.properties.basic.auth.user.info.username}")
+    private String schemaRegistryUserinforUsername;
+
+    @Value("${spring.kafka.properties.basic.auth.user.info.password}")
+    private String schemaRegistryUserinforPassword;
+
+    @Value("${spring.kafka.properties.sasl.key}")
+    private String clusterCredentialsKey;
+
+    @Value("${spring.kafka.properties.sasl.password}")
+    private String clusterCredentialsPassword;
+
+
+
+    private  static  final String SAAS_JAAS_CONFIG = "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"%s\" password=\"%s\";";
+
 
 
 
@@ -66,12 +77,12 @@ public class KafkaProducerConfig {
         props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, valueSerializer);
         props.put(AbstractKafkaSchemaSerDeConfig.SCHEMA_REGISTRY_URL_CONFIG, schemaRegistryUrl);
         props.put(AbstractKafkaSchemaSerDeConfig.BASIC_AUTH_CREDENTIALS_SOURCE, schemaRegistryCredentialsSource);
-        props.put(AbstractKafkaSchemaSerDeConfig.USER_INFO_CONFIG, schemaRegistryUserInfoConfig);
+        props.put(AbstractKafkaSchemaSerDeConfig.USER_INFO_CONFIG, String.format("%s:%s",schemaRegistryUserinforUsername,schemaRegistryUserinforPassword));
         props.put(ProducerConfig.ACKS_CONFIG, acknowledgement);
         props.put(ProducerConfig.RETRIES_CONFIG, numberOfTries);
         props.put(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, imdepotence);
         props.put(KafkaAvroSerializerConfig.AVRO_REMOVE_JAVA_PROPS_CONFIG, true);
-        props.put(SaslConfigs.SASL_JAAS_CONFIG, saslJassConfig);
+        props.put(SaslConfigs.SASL_JAAS_CONFIG, String.format(SAAS_JAAS_CONFIG, clusterCredentialsKey, clusterCredentialsPassword));
         props.put(SaslConfigs.SASL_MECHANISM, saslMechanism);
         props.put(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, SecurityProtocol.SASL_SSL.name);
         return props;

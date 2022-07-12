@@ -1,6 +1,6 @@
 {
   "name": "UsuarioDadosTesteAvro",
-  "namespace": "com.lucasSilvs.confluentCloud.confluentcloudusecases.kafka",
+  "namespace": "com.lucassilvs.confluentcloud.confluentcloudusecases.kafka",
   "type": "record",
   "doc": "Sample schema to help you get started.",
   "fields": [
