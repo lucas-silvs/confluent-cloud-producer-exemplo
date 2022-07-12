@@ -1,6 +1,6 @@
 package com.lucassilvs.confluentcloud.confluentcloudusecases.gateway;
 
-import com.lucasSilvs.confluentCloud.confluentcloudusecases.kafka.UsuarioDadosTesteAvro;
+import com.lucassilvs.confluentcloud.confluentcloudusecases.kafka.UsuarioDadosTesteAvro;
 
 
 import org.springframework.beans.factory.annotation.Autowired;

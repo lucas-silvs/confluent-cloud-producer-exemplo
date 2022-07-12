@@ -1,7 +1,7 @@
 package com.lucassilvs.confluentcloud.confluentcloudusecases.service.impl;
 
 import com.lucassilvs.confluentcloud.confluentcloudusecases.gateway.KafkaPost;
-import com.lucasSilvs.confluentCloud.confluentcloudusecases.kafka.UsuarioDadosTesteAvro;
+import com.lucassilvs.confluentcloud.confluentcloudusecases.kafka.UsuarioDadosTesteAvro;
 import com.lucassilvs.confluentcloud.confluentcloudusecases.models.request.UsuarioDadosContract;
 import com.lucassilvs.confluentcloud.confluentcloudusecases.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
